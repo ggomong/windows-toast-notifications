@@ -27,6 +27,14 @@ namespace ToastNotifications
         {
             InitializeComponent();
 
+            var bodySize = labelBody.Size;
+            var measureBodySize = new Size(bodySize.Width,
+                Convert.ToInt32(
+                    Math.Floor(labelBody.CreateGraphics().MeasureString(body, labelBody.Font, bodySize.Width).Height)));
+
+            Height += measureBodySize.Height - bodySize.Height;
+            labelBody.Size = measureBodySize;
+
             if (duration < 0)
                 duration = int.MaxValue;
             else
